@@ -19,7 +19,10 @@ Some topics follow on bettwer from others and therefore have "prerequisites". So
 
 Advanced Haskell:
 - Monad Transformers
-  * Seminar lead: Jess
+  - Seminar lead: Jess
+  - [x] Combining Maybe and IO into MaybeIO
+  - [ ] Abstracting to the full MaybeT monad transformer (which transforms any Monad, not just just IO)
+  - [ ] Monad type classes for composable, effectful code (MonadFail, MonadIO)
 - Timing and Concurrency
   * Seminar lead: Jess
 - Arrows
@@ -67,3 +70,8 @@ I Can't Believe It's Not Haskell!:
   * Seminar lead: Charlie
 - Types are Properties
   * Seminar lead: Charlie
+
+Installing packages:
+--------------------
+
+- e.g. to install the `extra` package cabal install locally: `cabal install extra --lib --package-env .`
