@@ -99,6 +99,8 @@ plusplus (x:xs) ys = x : xs ++ ys
 
 {-
 
+https://v1.sflexplorer.kiransturt.co.uk/
+
 -- reverse [1,2,3]
 -- (reverse [2,3]) ++ [1]
 -- ((reverse [3]) ++ [2]) ++ [1]
