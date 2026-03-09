@@ -37,7 +37,10 @@ Advanced Haskell:
   * Seminar lead: Jess
   * Slides [here](https://docs.google.com/presentation/d/1i4Qeb1SaQDL2bZ2dfk6xSxSzIhRVTGS7hya1x1TFFDg/edit?usp=sharing)
 - Let's make a CPU Simulator
-  * Seminar lead: Jess
+  - Seminar lead: Jess
+  - [x] Modelling a CPU and instruction set as a data type
+  - [ ] Encoding/decoding instructions
+  - [ ] Executing instructions
 - Let's redo Sketch: Binary operations in Haskell
   * Seminar lead: Jess
 - Integrated Haskell Project (IHP): Haskell on Rails for web development
