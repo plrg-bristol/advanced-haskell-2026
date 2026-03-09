@@ -33,6 +33,7 @@ Advanced Haskell:
   * Seminar lead: Sam
 - Monoids
   * Seminar lead: Sam
+  * Status - started, could do a bit more if wanted
 - Object to Objects: Game Development in Haskell
   * Seminar lead: Jess
   * Slides [here](https://docs.google.com/presentation/d/1i4Qeb1SaQDL2bZ2dfk6xSxSzIhRVTGS7hya1x1TFFDg/edit?usp=sharing)
