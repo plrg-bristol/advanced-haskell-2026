@@ -106,3 +106,78 @@ singTL s x = s : x
 -- what if we want a new semantics
     -- easy to in deep embedding
     -- not at all nice to do in shallow
+
+-- best of both worlds: classy embedding
+
+class ClassyRobot rl where
+    stopC :: rl
+    danceC :: rl -> rl
+    teleportC :: Int -> Int -> rl -> rl
+    sayC :: String -> rl -> rl
+    -- singC :: String -> rl -> rl
+
+
+-- instance ClassyRobot Int where
+--     stopC = 1
+
+-- instance ClassyRobot DancesDanced where
+--     danceC = (+1)
+--     stopC = 0
+--     teleportC _ _ = id
+--     sayC _ = id
+
+newtype DD = DD Int deriving Show
+
+instance ClassyRobot DD where
+    danceC (DD x) = DD (x+1)
+    stopC = DD 0
+    teleportC _ _ = id
+    sayC _ = id
+
+classyProg :: (ClassyRobot rl) => rl
+classyProg = sayC "teleporting"
+    $ teleportC 0 0
+    $ sayC "dancing"
+    $ danceC
+    $ stopC
+
+-- extensible in semantics
+
+newtype TL = TL { runTL :: [String] } deriving Show
+
+-- runTL :: TL -> [String]
+-- runTL (TL x) = x
+
+wrapTL :: (TalkLog -> TalkLog) -> TL -> TL
+wrapTL f = TL . f . runTL
+
+instance ClassyRobot TL where
+    stopC = TL stopTL
+    teleportC :: Int -> Int -> TL -> TL
+    teleportC _ _ tl = tl
+    -- more reusable:
+    danceC :: TL -> TL
+    danceC = TL -- rewrap to be a TL
+            -- record dancing log (nothing)
+           . danceTL -- [String] / TalkLog
+           . runTL   -- TL
+    -- even more reusable (we will do wrapping a lot)
+    sayC s = wrapTL (sayTL s)
+    -- for comparison:
+    -- sayC s (TL x) = TL (s : x)
+
+-- extensible in syntax
+
+class ClassyRobot rl => SingingClassyRobot rl where
+    singC ::  String -> rl -> rl
+
+instance SingingClassyRobot DD where
+    singC _ = id
+
+classyProgSinging :: (SingingClassyRobot rl) => rl
+classyProgSinging = sayC "teleporting"
+    $ teleportC 0 0
+    $ sayC "dancing"
+    $ danceC
+    $ singC "laaa"
+    $ stopC
