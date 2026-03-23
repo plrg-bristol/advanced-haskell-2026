@@ -31,6 +31,7 @@ Advanced Haskell:
   * Seminar lead: Sam
 - Domain Specific Languages
   * Seminar lead: Sam
+  * Status - started, but could do more if wanted
 - Monoids
   * Seminar lead: Sam
   * Status - started, could do a bit more if wanted
@@ -54,7 +55,7 @@ Advanced Haskell:
 More Advanced Haskell:
 - Effects
   * Seminar lead: Sam
-  * Prerequisites - Expressive power scaling / DSLs
+  * Prerequisites - DSLs
 - Generalised Algebraic Data Types (GADTs) and "Dependent types"
   * Seminar lead: Jess
 - Lenses (+ prisms)
