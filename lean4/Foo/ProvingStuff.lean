@@ -28,3 +28,22 @@ theorem imp_to_or {p q : Prop}
   intro ⟨hp, hNotQ⟩
   have hq := pImpQ hp
   contradiction
+
+theorem imp_to_or' {p q : Prop}
+  : p -> (p -> q) -> ¬p ∨ q
+  := λhp fpq => Or.intro_right _ (fpq hp)
+
+open Classical
+
+theorem imp_to_or'' {p q : Prop}
+  : (p -> q) -> ¬p ∨ q := by
+  intro pImpQ
+  cases em p with
+  | inl hp => exact (Or.inr (pImpQ hp))
+  | inr hNp => exact (Or.inl hNp)
+
+#print imp_to_or''
+
+  -- λpImpQ =>
+  --   match em p with
+  --   |  hp => _
