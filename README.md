@@ -50,6 +50,7 @@ Advanced Haskell:
 - Structural Inductive Proofs
   * Seminar lead: Sam
 - Linear Haskell
+- Chess in Haskell (optional CW)
 
 
 More Advanced Haskell:
