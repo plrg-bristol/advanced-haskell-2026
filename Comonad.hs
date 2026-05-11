@@ -51,14 +51,38 @@ class Functor w => Comonad w where
 
 data Infinite a = Cons a (Infinite a) deriving Show
 
+
+
 exampleInf :: Infinite Int
 exampleInf = Cons 1 (Cons 2 (Cons 3 exampleInf))
 
+-- >>> showBitOfInf 4 exampleInf
+-- "[ 1 | 2 | 3 | 1 | ... ]"
+showBitOfInf :: Show a => Int -> Infinite a -> String
+showBitOfInf n i = "[ " ++ showBitOfInf' n i
+  where
+    showBitOfInf' 0 i = "... ]"
+    showBitOfInf' n (Cons x xs) = unwords $ [show x, "|", showBitOfInf' (n-1) xs]
+
+showBitOfInfBLA :: Show a => (Int -> Tape a -> String)
+  -> Int -> Infinite (Tape a) -> String
+showBitOfInfBLA f n i = "[ " ++ showBitOfInf' f n i
+  where
+    showBitOfInf' f 0 i = "... ]"
+    showBitOfInf' f n (Cons x xs) = unwords $ [f n x, "|", showBitOfInf' f (n-1) xs]
+-- TODO the n here: `f n x` needs to be the original n,not the decreasing n
 instance Functor Infinite where
   fmap :: (a -> b) -> Infinite a -> Infinite b
   fmap f (Cons a i) = Cons (f a) (fmap f i)
 
 data Tape a = Tape (Infinite a) a (Infinite a) deriving Show
+
+exampleT :: Tape Int
+exampleT = Tape exampleInf 0 exampleInf
+
+-- >>> showBitOfT 4 exampleT
+showBitOfT :: Show a => Int -> Tape a -> String
+showBitOfT i (Tape l x r) = unwords $ ["Tape", showBitOfInf i l , show x , showBitOfInf i r]
 
 instance Functor Tape where
   fmap :: (a -> b) -> Tape a -> Tape b
@@ -83,8 +107,13 @@ unfold f a =
   let (a1, a2) = f a
   in Cons a1 (unfold f a2)
 
+-- >>> showBitOfInfBLA showBitOfT 5 (allLefts exampleT)
+-- 
 allLefts :: Tape a -> Infinite (Tape a)
-allLefts t = unfold undefined undefined
+allLefts t = unfold tl t
+  where
+    tl :: Tape a -> (Tape a, Tape a)
+    tl t = (t, helperL t)
 
 helperL :: Tape a -> Tape a
 helperL (Tape (Cons x xs) a rs) = Tape xs x (Cons a rs)
