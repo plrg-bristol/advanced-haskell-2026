@@ -52,13 +52,15 @@ Advanced Haskell:
 - Linear Haskell
 - Chess in Haskell (optional CW)
 
-
 More Advanced Haskell:
 - Effects
   * Seminar lead: Sam
   * Prerequisites - DSLs
 - Generalised Algebraic Data Types (GADTs) and "Dependent types"
   * Seminar lead: Jess
+- Clash: From Haskell to Hardware
+  * seminar lead: Sam
+  * prerequisites: dependant types
 - Lenses (+ prisms)
   * Seminar lead: Sam
 - Comonads (game of life)
